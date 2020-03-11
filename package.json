@@ -1,0 +1,19 @@
+{
+  "name": "updator",
+  "version": "0.0.1",
+  "description": "A collection of methods to build automation tools that update your whole project tree",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bIuum/updator.git"
+  },
+  "author": "bIuum",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bIuum/updator/issues"
+  },
+  "homepage": "https://github.com/bIuum/updator#readme"
+}
