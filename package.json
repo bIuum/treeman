@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/bIuum/updator/issues"
   },
-  "homepage": "https://github.com/bIuum/updator#readme"
+  "homepage": "https://github.com/bIuum/updator#readme",
+  "devDependencies": {
+    "@types/node": "^13.9.0"
+  }
 }

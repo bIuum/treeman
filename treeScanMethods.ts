@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // input:
 // first argument: args (object):
@@ -12,8 +12,15 @@ const path = require('path');
 // arguments:
 //     err: object containing error, if no error - it is null
 //     file: the file path, further actions can be done through it
+//
+// output: cb() will apply to all matching files inside the directory tree
 
-function folderTreeScan(args, cb) {
+interface ScanInstructiong {
+  dirName: string;
+  ignoreList?: string[];
+}
+
+function folderTreeScan(args: ScanInstructiong, cb) {
   const { dirName, ignoreList } = args;
 
   // read the directory for its children, which are folders and/or files
