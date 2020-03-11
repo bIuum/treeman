@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
 
 // input:
 // first argument: args (object):
@@ -34,7 +34,7 @@ function folderTreeScan(args: ScanInstructiong, cb: Function) {
       const childPath = path.resolve(dirName, child);
   
       // ignore if this child is in the ignore list
-      if(ignoreList.includes(child)) return;
+      if(ignoreList?.includes(child)) return;
 
       // check for further information about the child
       // more operations could be added in a later time
