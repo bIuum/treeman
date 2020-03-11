@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { includesSubstring } from './utils';
+import { includesSubstring } from './utils/dataUtils';
 
 // callback cb function arguments:
 //     err: object containing error, if no error - it is null
