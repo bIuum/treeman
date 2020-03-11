@@ -49,15 +49,6 @@ function folderTreeScan(args, cb) {
   });
 };
 
-const args = {
-  dirName: 'desktop-proj',
-  ignoreList: ['node_modules']
+module.exports = {
+  folderTreeScan
 }
-
-folderTreeScan(args, (err, file) => {
-  if(err) console.log('Error!');
-
-  else {
-    if(path.extname(file) === '.txt') console.log(file);
-  }
-});
