@@ -28,7 +28,7 @@ function folderTreeScan(args: ScanInstructions, cb: Function) {
       const childPath = path.resolve(dirName, child);
   
       // ignore if this child is in the ignore list
-      if (includesSubstring(ignoreList, child)) return;
+      if (includesSubstring(ignoreList, childPath)) return;
 
       // check for further information about the child
       // more operations could be added in a later time
