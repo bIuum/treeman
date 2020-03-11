@@ -1,4 +1,4 @@
-const treeScanMethods = require('../treeScanMethods');
+const treeScanMethods = require('./treeScanMethods');
 
 const dirName = '../desktop-proj';
 const ignoreList = ['node_modules'];
@@ -9,7 +9,7 @@ const cb = (err: object, file: string) => {
     console.log(file);
 }
 
-treeScanMethods.folderTreeScan({ dirName, ignoreList}, cb);
+treeScanMethods.folderTreeScan({ dirName, ignoreList }, cb);
 
 module.exports = {
     ...treeScanMethods

@@ -1,15 +1,15 @@
-// input: 
-// argument 1: arr (array)
-// argument 2: str (string)
-// 
+import path from 'path';
+
 // output: true if argument 2 is a substring of one or more of the elements in the array
 
-function includesSubstring(arr: string[], str: string): boolean {
-    if(!arr.length) return false;
+export function includesSubstring(arr: string[], str: string): boolean {
+    if (!arr.length)
+        return false;
 
-    arr.forEach(element => {
-        if(element.includes(str)) return true;
+    arr.forEach(function (element) {
+        if (str.includes(element))
+            return true;
     });
-
+    
     return false;
 }

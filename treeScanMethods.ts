@@ -1,27 +1,21 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-// input:
-// first argument: args (object):
-//     {
-//         dirName: name of root folder to scan
-//         ignoreList: name of files/folder names to ignore  
-//     }
-//
-// second argument: cb (function)
-// arguments:
+import { includesSubstring } from './utils';
+
+// callback cb function arguments:
 //     err: object containing error, if no error - it is null
-//     file: the file path, further actions can be done through it
+//     file: the file path, further actions can be done through it, if error, it is undefinedP
 //
 // output: cb() will apply to all matching files inside the directory tree
 
-interface ScanInstructiong {
+interface ScanInstructions {
   dirName: string;
   ignoreList?: string[];
 }
 
-function folderTreeScan(args: ScanInstructiong, cb: Function) {
-  const { dirName, ignoreList } = args;
+function folderTreeScan(args: ScanInstructions, cb: Function) {
+  const { dirName, ignoreList = [] } = args;
 
   // read the directory for its children, which are folders and/or files
   fs.readdir(dirName, (err, children) => {
@@ -34,7 +28,7 @@ function folderTreeScan(args: ScanInstructiong, cb: Function) {
       const childPath = path.resolve(dirName, child);
   
       // ignore if this child is in the ignore list
-      if(ignoreList?.includes(child)) return;
+      if (includesSubstring(ignoreList, child)) return;
 
       // check for further information about the child
       // more operations could be added in a later time
