@@ -20,7 +20,7 @@ interface ScanInstructiong {
   ignoreList?: string[];
 }
 
-function folderTreeScan(args: ScanInstructiong, cb) {
+function folderTreeScan(args: ScanInstructiong, cb: Function) {
   const { dirName, ignoreList } = args;
 
   // read the directory for its children, which are folders and/or files
