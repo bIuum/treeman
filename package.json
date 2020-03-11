@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bIuum/updator.git"
+    "url": "https://github.com/bIuum/treeman.git"
   },
   "author": "bIuum",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bIuum/updator/issues"
+    "url": "https://github.com/bIuum/treeman/issues"
   },
-  "homepage": "https://github.com/bIuum/updator#readme",
+  "homepage": "https://github.com/bIuum/treeman#readme",
   "devDependencies": {
     "@types/node": "^13.9.0"
   }
