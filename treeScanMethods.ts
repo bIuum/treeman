@@ -3,11 +3,22 @@ import * as path from 'path';
 
 import { includesSubstring } from './utils/dataUtils';
 
-// callback cb function arguments:
-//     err: object containing error, if no error - it is null
-//     file: the file path, further actions can be done through it, if error, it is undefinedP
-//
-// output: cb() will apply to all matching files inside the directory tree
+/**
+ * This callback function applies to all files found in a tree scan.
+ * 
+ * @callback fileCallback
+ * @param {Object} err - An object representing an error, if no error, this value is null.
+ * @param {string} file - The file's absolute path, use it to edit the file with one of treeman's functions, or your own.
+ */
+
+/**
+ * Applies a callback function to all matching files inside the directory tree.
+ * 
+ * @param {Object} args - Arguments containing instructions for the tree scan method.
+ * @param {string} args.dirName - The path to your folder tree root.
+ * @param {string[]} [args.ignoreList] - Optional list of files/folder names/extensions to ignore. example: ['node_modules','.css'] will ignore every file inside node_modules, as well as every css file in your tree.
+ * @param {fileCallback} cb - A callback that will apply to every file found in the scan.
+ */
 
 interface ScanInstructions {
   dirName: string;

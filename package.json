@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/bIuum/treeman#readme",
   "devDependencies": {
-    "@types/node": "^13.9.0"
+    "@types/node": "^13.9.0",
+    "jsdoc": "^3.6.3",
+    "typescript": "^3.8.3"
   }
 }
