@@ -1,14 +1,15 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { includesSubstring } from './utils/dataUtils';
+import { includesSubstring } from './utils/utils';
+import File from './File';
 
 /**
  * This callback function applies to all files found in a tree scan.
  * 
  * @callback fileCallback
  * @param {Object} err - An object representing an error, if no error, this value is null.
- * @param {string} file - The file's absolute path, use it to edit the file with one of treeman's functions, or your own.
+ * @param {Object} file - An object representing the file.
  */
 
 /**
@@ -25,7 +26,7 @@ interface ScanInstructions {
   ignoreList?: string[];
 }
 
-function folderTreeScan(args: ScanInstructions, cb: Function) {
+function scan(args: ScanInstructions, cb: Function) {
   const { dirName, ignoreList = [] } = args;
 
   // read the directory for its children, which are folders and/or files
@@ -49,18 +50,20 @@ function folderTreeScan(args: ScanInstructions, cb: Function) {
         // if it's a directory, call the function recursively with the directory
         const isDir = childStat.isDirectory();
   
-        if(isDir) folderTreeScan({
+        if(isDir) scan({
           ...args,
           dirName: childPath
         }, cb);
 
         // if it's a file, apply the predefined callback on it
-        else cb(null, childPath);
+        else{
+          const file = new File(childPath);
+
+          cb(null, file);
+        }
       });
     });
   });
 };
 
-module.exports = {
-  folderTreeScan
-}
+module.exports = scan;

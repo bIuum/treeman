@@ -1,9 +1,9 @@
-const treeScanMethods = require('./treeScanMethods');
+const scan = require('./scan');
 const fileUtils = require('./utils/fileUtils');
 const dataUtils = require('./utils/dataUtils');
 
 module.exports = {
-    ...treeScanMethods,
+    scan,
     ...dataUtils,
     ...fileUtils
 }
