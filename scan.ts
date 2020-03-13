@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { includesSubstring } from './utils/utils';
+import { includesSubstring } from './utils';
 import File from './File';
 
 /**

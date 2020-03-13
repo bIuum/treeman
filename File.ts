@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { splitLines, joinLines, getExtension } from './utils/utils';
+import { splitLines, joinLines, getExtension } from './utils';
 
 class File {
     public path: string;
