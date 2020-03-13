@@ -43,7 +43,6 @@ function scan(args: ScanInstructions, cb: Function) {
       if (includesSubstring(ignoreList, childPath)) return;
 
       // check for further information about the child
-      // more operations could be added in a later time
       fs.stat(childPath, (err, childStat) => {
         if (err) return cb(err);
   
