@@ -68,12 +68,25 @@ class File {
         const editedLines = [...this.line];
         editedLines[index] = line;
 
-        const editedData = joinLines(editedLines);
         try {
+            const editedData = joinLines(editedLines);
             fs.writeFileSync(this.path, editedData);
             this.update();
         } catch {
-            console.error(`ERROR: Failed to write into ${this.path} white editing line #${index}`);
+            console.error(`ERROR: Failed to write into ${this.path} while editing line #${index}`);
+            return;
+        }
+    }
+
+    appendToTop(line: string): void {
+        const editedLines = [line, ...this.line];
+
+        try {
+            const editedData = joinLines(editedLines);
+            fs.writeFileSync(this.path, editedData);
+            this.update();
+        } catch {
+            console.error(`ERROR: Failed to write into ${this.path} while adding a line #0`);
             return;
         }
     }
