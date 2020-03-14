@@ -2,7 +2,7 @@
 Build automation tools that update your whole project tree.
 
 
-# It's that simple:
+### It's that simple:
 ```
 const { scan } = require('treeman');
 
