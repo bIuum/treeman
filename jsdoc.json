@@ -1,15 +1,26 @@
 {
     "source": {
-        "include": ["dist"],
-        "includePattern": ".js$",
-        "excludePattern": "(node_modules/|docs)"
+        "exclude": ["node_modules"],
+        "includePattern": ".+\\.ts(doc|x)?$",
+        "excludePattern": ".+\\.(test|spec).ts"
     },
-    "plugins": ["plugins/markdown"],
+    "plugins": [
+        "plugins/markdown",
+        "node_modules/jsdoc-babel"
+    ],
+    "babel": {
+        "extensions": ["ts"],
+        "ignore": ["**/*.(test|spec).ts"],
+        "babelrc": false,
+        "presets": [["@babel/preset-env", { "targets": { "node": true } }], "@babel/preset-typescript"],
+        "plugins": ["@babel/proposal-class-properties", "@babel/proposal-object-rest-spread"]
+    },
     "templates": {
         "cleverLinks": true,
         "monospaceLinks": true
     },
     "opts": {
+        "template": "node_modules/fucazu-minami",
         "recurse": true,
         "destination": "./docs/"
     }
