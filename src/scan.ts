@@ -26,7 +26,7 @@ interface ScanInstructions {
   ignoreList?: string[];
 }
 
-function scan(args: ScanInstructions, cb: Function) {
+export default function scan(args: ScanInstructions, cb: Function): void {
   const { dirName, ignoreList = [] } = args;
 
   // read the directory for its children, which are folders and/or files
@@ -64,5 +64,3 @@ function scan(args: ScanInstructions, cb: Function) {
     });
   });
 };
-
-export default scan;
