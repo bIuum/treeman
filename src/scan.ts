@@ -12,32 +12,33 @@ import File from './File';
  * @param {Object} file - An object representing the file.
  */
 
-/**
- * Applies a callback function to all matching files inside the directory tree.
- * 
- * @param {Object} args - Arguments containing instructions for the tree scan method.
- * @param {string} args.dirName - The path to your folder tree root.
- * @param {string[]} [args.ignoreList] - Optional list of files/folder names/extensions to ignore. example: ['node_modules','.css'] will ignore every file inside node_modules, as well as every css file in your tree.
- * @param {fileCallback} cb - A callback that will apply to every file found in the scan.
- */
 
 interface ScanInstructions {
-  dirName: string;
+  dirPath: string;
   ignoreList?: string[];
 }
 
+/**
+ * Treeman's main function, scans through a folder down the tree.
+ * Applies a callback function to all matching files inside the directory tree.
+ * 
+ * @param {Object} args - Arguments containing instructions for the tree scan method.
+ * @param {string} args.dirPath - The path to your folder tree root.
+ * @param {string[]} [args.ignoreList] - Optional list of files/folder names/extensions to ignore. example: ['node_modules','.css'] will ignore every file inside node_modules, as well as every css file in your tree.
+ * @param {fileCallback} cb - A callback that will apply to every file found in the scan.
+ */
 export default function scan(args: ScanInstructions, cb: Function) {
-  const { dirName, ignoreList = [] } = args;
+  const { dirPath, ignoreList = [] } = args;
 
   // read the directory for its children, which are folders and/or files
-  fs.readdir(dirName, (err, children) => {
+  fs.readdir(dirPath, (err, children) => {
     if (err) return cb(err);
 
     if(children.length === 0) return;
   
     // iterate over the children
     children.forEach((child) => {
-      const childPath = path.resolve(dirName, child);
+      const childPath = path.resolve(dirPath, child);
   
       // ignore if this child is in the ignore list
       if (includesSubstring(ignoreList, childPath)) return;
@@ -51,7 +52,7 @@ export default function scan(args: ScanInstructions, cb: Function) {
   
         if(isDir) scan({
           ...args,
-          dirName: childPath
+          dirPath: childPath
         }, cb);
 
         // if it's a file, apply the predefined callback on it
