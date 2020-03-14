@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { splitLines, joinLines, getExtension } from './utils';
+import { splitLines, joinLines, getExtension } from './utils/utils';
 
 /** Class representing a file, used to create a File object during a scan */
 class File {
