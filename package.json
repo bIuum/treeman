@@ -5,8 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "test",
-    "prepublish": "tsc"
+    "buils": "tsc"
   },
   "repository": {
     "type": "git",
