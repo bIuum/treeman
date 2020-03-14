@@ -78,7 +78,7 @@ class File {
         try {
             fs.writeFileSync(this.path, replaced);
             this.update();
-        } catch(err) {
+        } catch {
             console.error(`ERROR: Failed to write into ${this.path} while replacing data.`);
             return;
         }
