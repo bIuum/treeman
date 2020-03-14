@@ -5,11 +5,7 @@ import { includesSubstring } from './utils/utils';
 import File from './File';
 
 /**
- * This callback function applies to all files found in a tree scan.
- * 
- * @callback fileCallback
- * @param {Object} err - An object representing an error, if no error, this value is null.
- * @param {Object} file - An object representing the file.
+
  */
 
 
@@ -19,6 +15,12 @@ interface ScanInstructions {
 }
 
 /**
+  * This callback function applies to all files found in a tree scan.
+ * 
+ * @callback fileCallback
+ * @param {Object} err - An object representing an error, if no error, this value is null.
+ * @param {Object} file - An object representing the file.
+ * 
  * Treeman's main function, scans through a folder down the tree.
  * Applies a callback function to all matching files inside the directory tree.
  * 
