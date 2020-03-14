@@ -6,13 +6,15 @@ Build automation tools that update your whole project tree.
 ```
 const { scan } = require('treeman');
 
-const addReactImport = (err, file) => {
-    if(file.ext === '.jsx' || file.ext === '.js') {
-        if(!file.includes("import React")) {
-            file.addLine(0, "import React from 'react';");
-        }
+const handleFile = (err, file) => {
+    if(err) {
+        // handle error
     }
+
+    // View and edit the file using the treeman file API
 }
 
-scan({dirName: 'my-directory'}, addReactImport);
+scan({dirName: 'my-directory'}, handleFile);
 ```
+
+
