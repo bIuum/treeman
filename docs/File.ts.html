@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>File.ts - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="File.html">File</a><ul class='methods'><li data-type='method'><a href="File.html#addLine">addLine</a></li><li data-type='method'><a href="File.html#delete">delete</a></li><li data-type='method'><a href="File.html#editLine">editLine</a></li><li data-type='method'><a href="File.html#includes">includes</a></li><li data-type='method'><a href="File.html#replace">replace</a></li><li data-type='method'><a href="File.html#update">update</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#scan">scan</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">File.ts</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import fs from 'fs';
+import path from 'path';
+
+import { splitLines, joinLines, getExtension } from './utils/utils';
+
+/** Class representing a file, used to create a File object during a scan */
+class File {
+    public path: string;
+    public encoding: string;
+    public name: string;
+    public data: string;
+    public ext: string;
+    public line: string[];
+    public lines: number;
+    
+    /**
+     * Create an instance of a file.
+     * 
+     * @param {string} filePath - An absolute or relative path to the file.
+     * @param {string} encoding - File's character encoding, defaults to utf-8.
+     */
+    constructor(filePath: string, encoding: string = 'utf-8') {
+        const data = fs.readFileSync(filePath, encoding);
+
+        this.path = filePath;
+        this.encoding = encoding;
+        this.name = path.basename(filePath);
+        this.data = data;
+        this.ext = getExtension(filePath);
+        this.line = splitLines(data);
+        this.lines = this.line.length;
+    }
+
+    /**
+     * This is a private method, used within its instance by other methods.
+     * This method reconstructs the instance, "refreshing" all of its properties.
+     * Mainly used after an update to one of the file's properties that might affect other properties indirectly.
+     * 
+     * @param {string} filePath - File's relative or absolute path. Defaults to current path. 
+     * @param {string} encoding - File's character encoding. Defaults to current encoding.
+     */
+    private update(filePath: string = this.path, encoding: string = this.encoding): void {
+        const data = fs.readFileSync(filePath, encoding);
+
+        this.path = filePath;
+        this.encoding = encoding;
+        this.name = path.basename(filePath);
+        this.data = data;
+        this.ext = getExtension(filePath);
+        this.line = splitLines(data);
+        this.lines = this.line.length;
+    }
+
+    /**
+     * Check if a string is included in the file. Whitespaces are ignored.
+     * 
+     * @param {string} str - The string that is being searched for in the file's content.
+     * @returns {booleam} True if the string appears at least once inside the file, false if not. 
+     */
+    includes(str: string): boolean {
+        const trimData = this.data.replace(/\s/g, '');
+        const trimStr = str.replace(/\s/g, '');
+
+        return trimData.includes(trimStr);
+    }
+
+    /**
+     * Replaces the first instance of a string with another string inside the file's content.
+     * NOTE: Just like string.prototype.replace(), it replaces only the first instance. To replace ALL instances, use regex.
+     * Example: Replace all instances of 'Hello' with 'World': File.replace(/Hello/g, 'World');
+     * 
+     * @param {string} strFrom - The string you wish to replace. 
+     * @param {string} strTo - The string that will replace the previous one.
+     */
+    replace(strFrom: string, strTo: string): void {
+        const replaced = this.data.replace(strFrom, strTo);
+
+        try {
+            fs.writeFileSync(this.path, replaced);
+            this.update();
+        } catch {
+            console.error(`ERROR: Failed to write into ${this.path} while replacing data.`);
+            return;
+        }
+    }
+
+    /**
+     * Deletes the file from memory. 
+     * NOTE: After deletion, the file will not be sent to trash, it will be permanently deleted from memory.
+     */
+    delete(): void {
+        try {
+            fs.unlinkSync(this.path);
+        } catch {
+            console.error(`ERROR: Failed to delete ${this.path}.`)
+            return;
+        }
+    }
+
+    /**
+     * Replace a specific line inside the file.
+     * 
+     * @param {number} index - Index of the line you wish to edit.
+     * @param {string} line - The new contents of the line you wish to edit.
+     */
+    editLine(index: number, line: string): void {
+        const editedLines = [...this.line];
+        editedLines.splice(index, 1, line);
+
+        try {
+            const editedData = joinLines(editedLines);
+            fs.writeFileSync(this.path, editedData);
+            this.update();
+        } catch {
+            console.error(`ERROR: Failed to write into ${this.path} while editing line #${index}`);
+            return;
+        }
+    }
+
+    /**
+     * Adds a line into the file in a given index.
+     * If the index is in the beginning or middle of a file, all following lines will be pushed one index up.
+     * 
+     * @param {number} index - Index of the line you wish to add. 
+     * @param {string} line - The contents of the line you wish to add.
+     */
+    addLine(index: number, line: string): void {
+        const editedLines = [...this.line];
+        editedLines.splice(index, 0, line);
+
+        try {
+            const editedData = joinLines(editedLines);
+            fs.writeFileSync(this.path, editedData);
+            this.update();
+        } catch {
+            console.error(`ERROR: Failed to write into ${this.path} while adding line #${index}`);
+            return;
+        }
+    }
+}
+
+export default File;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Mar 14 2020 11:41:04 GMT+0200 (GMT+02:00) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
