@@ -26,7 +26,7 @@ interface ScanInstructions {
   ignoreList?: string[];
 }
 
-export default function scan(args: ScanInstructions, cb: Function): void {
+export default function scan(args: ScanInstructions, cb: Function) {
   const { dirName, ignoreList = [] } = args;
 
   // read the directory for its children, which are folders and/or files
