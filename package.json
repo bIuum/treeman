@@ -2,8 +2,8 @@
   "name": "treeman",
   "version": "1.0.0",
   "description": "build automation tools that update your whole project tree",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "test",
     "prepublish": "tsc"
