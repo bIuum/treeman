@@ -32,9 +32,9 @@ class File {
     }
 
     /**
-     * This is a private methods, used within its instance, by other methods.
-     * This method reconstructs the object, "refreshing" all of its properties.
-     * Used after an update to one of the file's properties that might affect other properties indirectly.
+     * This is a private method, used within its instance by other methods.
+     * This method reconstructs the instance, "refreshing" all of its properties.
+     * Mainly used after an update to one of the file's properties that might affect other properties indirectly.
      * 
      * @param {string} filePath - File's relative or absolute path. Defaults to current path. 
      * @param {string} encoding - File's character encoding. Defaults to current encoding.

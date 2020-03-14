@@ -1,7 +1,7 @@
 {
     "source": {
         "include": ["src"],
-        "exclude": ["utils"],
+        "exclude": ["src/utils"],
         "includePattern": ".+\\.ts(doc|x)?$",
         "excludePattern": ".+\\.(test|spec).ts"
     },
