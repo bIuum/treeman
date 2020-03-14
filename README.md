@@ -17,5 +17,5 @@ const handleFile = (err, file) => {
 scan({dirPath: 'my-directory'}, handleFile);
 ```
 
-You can view file's properties and contents, edit and delete the file using the treeman file API.
+You can view files' properties and contents, edit and delete files using the treeman file API.
 For more information regarding the treeman file API, view the docs.
