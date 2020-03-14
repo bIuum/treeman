@@ -1,6 +1,6 @@
 {
   "name": "treeman",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "build automation tools that update your whole project tree",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
