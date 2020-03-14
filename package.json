@@ -18,6 +18,13 @@
   "bugs": {
     "url": "https://github.com/bIuum/treeman/issues"
   },
+  "keywords": [
+    "javascript",
+    "nodejs",
+    "files",
+    "folder",
+    "tree"
+  ],
   "homepage": "https://github.com/bIuum/treeman#readme",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
