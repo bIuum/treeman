@@ -1,3 +1,3 @@
-const scan = require('./src/scan');
+import scan from './src/scan';
 
 export default scan;

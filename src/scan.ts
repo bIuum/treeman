@@ -65,4 +65,4 @@ function scan(args: ScanInstructions, cb: Function) {
   });
 };
 
-module.exports = scan;
+export default scan;
