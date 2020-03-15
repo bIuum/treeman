@@ -6,12 +6,8 @@ Build automation tools that update your whole project tree.
 ```
 const { scan } = require('treeman');
 
-const handleFile = (err, file) => {
-    if(err) {
-        // handle error
-    } else {
-        // view and edit the file using the treeman file API
-    }
+const handleFile = (file) => {
+    // view and edit the file using the treeman file API
 }
 
 scan({dirPath: 'my-directory'}, handleFile);
