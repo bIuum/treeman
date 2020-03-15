@@ -6,6 +6,9 @@ import path from 'path';
  * path.extname('mytest.test.js') -> '.js'
  * getExtension('mytest.test.js) -> '.test.js
  * 
+ * NOTE: This function will be problematic if your file's name includes dots that are unrelated to its extension.
+ * For those cases, path.extname() is preferable.
+ * 
  * @param {string} file - File's base name or path.
  * @returns {string} File's extension.  
  */
