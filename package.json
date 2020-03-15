@@ -23,7 +23,8 @@
     "nodejs",
     "files",
     "folder",
-    "tree"
+    "tree",
+    "filesystem"
   ],
   "homepage": "https://github.com/bIuum/treeman#readme",
   "devDependencies": {
