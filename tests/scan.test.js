@@ -7,14 +7,11 @@ const FILES_IN_LEVEL_ZERO = 1;
 test('scan() scans all files', () => {
     let numOfFiles = 0;
     const dirPath = 'tests/testFolder';
-    const cb = (err, file) => {
-        if(err) throw err;
-        else {
-            numOfFiles += 1;
-        }
+    const cb = () => {
+        numOfFiles += 1;
     }
 
-    scan({ dirPath }, numOfFiles).then(() => {
+    scan({ dirPath }, cb).then(() => {
         expect(numOfFiles).toBe(FILES_IN_TESTFOL);
     });
 });
@@ -24,14 +21,11 @@ test('scan() ignores a file by extension', () => {
     const dirPath = 'tests/testFolder';
     const ignoreList = ['.js'];
 
-    const cb = (err, file) => {
-        if(err) throw err;
-        else {
-            numOfFiles += 1;
-        }
+    const cb = (file) => {
+        numOfFiles += 1;
     }
 
-    scan({ dirPath, ignoreList }, numOfFiles).then(() => {
+    scan({ dirPath, ignoreList }, cb).then(() => {
         expect(numOfFiles).toBe(TEXT_FILES_IN_TESTFOL);
     });
 });
@@ -41,14 +35,11 @@ test('scan() ignores a directory', () => {
     const dirPath = 'tests/testFolder';
     const ignoreList = ['level1deep'];
 
-    const cb = (err, file) => {
-        if(err) throw err;
-        else {
-            numOfFiles += 1;
-        }
+    const cb = (file) => {
+        numOfFiles += 1;
     }
 
-    scan({ dirPath, ignoreList }, numOfFiles).then(() => {
+    scan({ dirPath, ignoreList }, cb).then(() => {
         expect(numOfFiles).toBe(FILES_IN_LEVEL_ZERO);
     });
 });
