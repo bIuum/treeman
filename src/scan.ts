@@ -39,7 +39,7 @@ export default async function scan(args: ScanInstructions, cb: Function) {
       const childPath = path.resolve(dirPath, child);
   
       // ignore if this child is in the ignore list
-      if (includesSubstring(ignoreList, childPath)) return;
+      if (includesSubstring(ignoreList, childPath)) continue;
 
       // check for further information about the child
       try {
