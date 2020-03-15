@@ -13,7 +13,6 @@ interface ScanInstructions {
  * This callback function applies to all files found in a tree scan.
  * 
  * @callback fileCallback
- * @param {Object} err - An object representing an error, if no error, this value is null.
  * @param {Object} file - An object representing the file. View the File class for more information.
  * 
 */
@@ -58,13 +57,13 @@ export default async function scan(args: ScanInstructions, cb: Function) {
         else{
           const file = new File(childPath);
 
-          cb(null, file);
+          cb(file);
         }
       } catch(err) {
-        cb(err);
+        throw new Error(`Scan failed while reading file ${childPath}`);
       }
     }
   } catch(err) {
-    cb(err);
+    throw new Error(`Scan failed while reading directory ${dirPath}`);
   }
 };
