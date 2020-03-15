@@ -1,7 +1,6 @@
 docs/
 tests/
 src/
-README.md
 jsdoc.json
 package.json
 tsconfig.json
