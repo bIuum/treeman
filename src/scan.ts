@@ -7,6 +7,7 @@ import File from './File';
 interface ScanInstructions {
   dirPath: string;
   ignoreList?: string[];
+  encoding: string;
 }
 
 /**
@@ -23,6 +24,7 @@ interface ScanInstructions {
  * @param {Object} args - Arguments containing instructions for the tree scan method.
  * @param {string} args.dirPath - The path to your folder tree root.
  * @param {string[]} [args.ignoreList] - Optional list of files/folder names/extensions to ignore. example: ['node_modules','.css'] will ignore every file inside node_modules, as well as every css file in your tree.
+ * @param {string} args.encoding - file encoding (defaults to utf-8)
  * @param {fileCallback} cb - A callback that will apply to every file found in the scan.
  */
 export default async function scan(args: ScanInstructions, cb: Function) {
@@ -55,7 +57,7 @@ export default async function scan(args: ScanInstructions, cb: Function) {
 
         // if it's a file, apply the predefined callback on it
         else{
-          const file = new File(childPath);
+          const file = new File(childPath, args.encoding);
 
           cb(file);
         }
